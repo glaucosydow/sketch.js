@@ -279,8 +279,8 @@
 
             if ( context.fullscreen ) {
 
-                h = context.height = win.innerHeight;
-                w = context.width = win.innerWidth;
+                h = context.height = ( options.container || doc.body ).clientHeight;
+                w = context.width = ( options.container || doc.body ).clientWidth;
             }
 
             if ( context.retina && is2D && ratio ) {
