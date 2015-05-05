@@ -2,7 +2,7 @@
 /* Copyright (C) 2013 Justin Windle, http://soulwire.co.uk */
 
 (function ( root, factory ) {
-    
+
     if ( typeof exports === 'object' ) {
 
         // CommonJS like
@@ -42,6 +42,7 @@
 
     var doc = document;
     var win = window;
+    var container;
 
     var instances = [];
 
@@ -258,7 +259,7 @@
                 // Draw
 
                 trigger( context.draw );
-                
+
                 // Post draw
 
                 if ( is2D && context.retina )
@@ -279,8 +280,8 @@
 
             if ( context.fullscreen ) {
 
-                h = context.height = ( options.container || doc.body ).clientHeight;
-                w = context.width = ( options.container || doc.body ).clientWidth;
+                h = context.height = container.clientHeight;
+                w = context.width = container.clientWidth;
             }
 
             if ( context.retina && is2D && ratio ) {
@@ -528,6 +529,7 @@
 
             if ( options.globals ) Sketch.install( self );
 
+            container = ( options.container || doc.body );
             element = options.element = options.element || doc.createElement( options.type === DOM ? 'div' : 'canvas' );
 
             context = options.context = options.context || (function() {
@@ -549,7 +551,7 @@
 
             })();
 
-            ( options.container || doc.body ).appendChild( element );
+            container.appendChild( element );
 
             return Sketch.augment( context, options );
         },
